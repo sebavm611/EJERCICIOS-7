@@ -1,7 +1,7 @@
 
 /**
  *
- * @author sumin
+ * @author Rodrigo Ortiz y Pablo Velez
  */
 import java.util.Scanner;
 

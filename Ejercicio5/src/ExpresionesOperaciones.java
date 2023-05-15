@@ -70,13 +70,39 @@ public class ExpresionesOperaciones {
         } else {
             mediana = enteros[tamanio / 2];
         }
-
+        
+        int[] arregloUnicos = eliminarRepetidos(enteros);
+        int[] contadorArreglo = new int[arregloUnicos.length];
+        
+        int cont = 0;
+        for (int i = 0; i < arregloUnicos.length; i++) {
+            int contAux=0;
+            for (int j = 0; j < enteros.length; j++) {
+                if(arregloUnicos[i]==enteros[j]){
+                    contadorArreglo[i]++;
+                    contAux++;
+                }
+            }
+            if(contAux>cont){
+                cont = contAux;
+            }
+        }
+        
+        StringBuilder moda = new StringBuilder();
+        
+        for (int i = 0; i < arregloUnicos.length; i++) {
+            if(cont==contadorArreglo[i]){
+                moda.append(arregloUnicos[i]).append(", ");
+            }
+        }
+        moda.append("con ").append(cont).append(" ocurrencias");
+        
         System.out.println("SUMA: " + suma);
         System.out.println("MEDIA: " + media);
         System.out.println("DESVIACION ESTANDAR: " + desviacionEstandar);
         System.out.println("VARIANZA POBLACIONAL: " + varianzaPoblacional);
         System.out.println("MEDIANA: " + mediana);
-        System.out.println("MODA: ");
+        System.out.println("MODA: "+moda.toString());
         System.out.println("MAYOR: "+enteros[enteros.length-1]);
         System.out.println("MENOR: "+enteros[0]);
     }
@@ -94,14 +120,42 @@ public class ExpresionesOperaciones {
         }
     }
     
-    public static void eliminarRepetidos(int array[]){
-        int arreglo[] = new int [array.length];
-        int cont=0;
-        
-        int dato;
-        boolean existente = false;
-        for (int i = 0; i < array.length; i++) {
-            
+    public static int[] eliminarRepetidos(int arreglo[]){
+        int longitudOriginal = arreglo.length;
+
+        // Contar el número de elementos únicos
+        int contador = 0;
+        for (int i = 0; i < longitudOriginal; i++) {
+            boolean esRepetido = false;
+            for (int j = 0; j < i; j++) {
+                if (arreglo[i]==arreglo[j]) {
+                    esRepetido = true;
+                    break;
+                }
+            }
+            if (!esRepetido) {
+                contador++;
+            }
         }
+
+        // Crear un nuevo arreglo sin elementos repetidos
+        int[] resultado = new int[contador];
+        int indice = 0;
+        for (int i = 0; i < longitudOriginal; i++) {
+            boolean esRepetido = false;
+            for (int j = 0; j < i; j++) {
+                if (arreglo[i]==arreglo[j]) {
+                    esRepetido = true;
+                    break;
+                }
+            }
+            if (!esRepetido) {
+                resultado[indice] = arreglo[i];
+                indice++;
+            }
+        }
+
+        return resultado;
     }
+    
 }

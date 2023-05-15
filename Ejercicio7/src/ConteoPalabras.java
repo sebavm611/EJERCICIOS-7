@@ -54,6 +54,7 @@ public class ConteoPalabras {
                 }
             }
         }
+        
         int numChar = cadUnicos[0].length();
         int contCad = 0;
         for (int i=0;i<cadUnicos.length;i++) {
